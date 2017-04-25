@@ -1,0 +1,105 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{color}
+\usepackage[utf8]{inputenc}
+\usepackage[]{program}
+
+\newenvironment{EX}[2][Exercise]{\begin{trivlist}
+\item[{\color{red} \hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}}]}{\end{trivlist}}
+
+\newenvironment{SL}[1][Solution]{\begin{trivlist}
+\item[{\color{blue} \hskip \labelsep {\bfseries #1:}}]}{\end{trivlist}}
+
+
+\begin{document}
+
+% --------------------------------------------------------------
+% Start here
+% --------------------------------------------------------------
+
+\noindent 362982 (Pedro Carvalho) \hfill {\Large \bfseries CK0146: Reality Check} \\
+
+\begin{EX}{R.1}
+ Let $\Omega$ be a finite set of all possible outcomes and $P:\ \Omega \rightarrow \mathbb{R}$ a probability measure that (by definition) satisfies $P(\omega) \geq 0$ and $\sum\limits_{\omega \in \Omega} P(\omega) = 1$. Let $f:\ \Omega \rightarrow \mathbb{R}$ be an arbitrary function o $\Omega$. Define the $expectation$ of function $f$ by $E[f] = \sum\limits_{\omega \in \Omega} P(\omega)f(\omega)$. The $variance$ of function $f$ is defined by $Var[f] = E[(f - E[f])^2]$.
+ 
+ Use such definitions to show that:
+ \begin{itemize}
+  \item $E[\cdot]$ is a linear operator.
+  \item $Var[f(\omega)] = E[f(\omega)^2] - E[f(\omega)]^2$
+ \end{itemize}
+\end{EX}
+
+\begin{SL}\
+ \begin{itemize}
+  \item For the first item, we must first define what is a linear operator. We can say that $\overrightarrow{L}$ is a linear operand if for every scalar $t$ and pair of functions $f$ and $g$, the following statements hold:
+  \begin{itemize}
+   \item $\overrightarrow{L}(f + g) = \overrightarrow{L}(f) + \overrightarrow{L}(g)$
+   \item $\overrightarrow{L}(tf) = t\overrightarrow{L}(f)$.
+  \end{itemize}
+  
+  Let's show that the first condition hold for $E[f]$. Let $f$ and $g$ be two arbitrary functions with domain on $\Omega$. From the definition of expectation of a function, we have $$E[f + g] = \sum\limits_{\omega \in \Omega} P(\omega)[(f + g)(\omega)] $$ $$= \sum\limits_{\omega \in \Omega} P(\omega)[f(\omega) + g(\omega)]$$ $$= \sum\limits_{\omega \in \Omega} [P(\omega)f(\omega) + P(\omega)g(\omega)]$$ $$= \sum\limits_{\omega \in \Omega}P(\omega)f(\omega) + \sum\limits_{\omega \in \Omega}P(\omega)g(\omega)$$ $$= E[f] + E[g]$$
+  
+  Let's now show that the second condition hold for $E[f]$. Let $t \in \mathbb{R}$ be a scalar and $f$, a function with domain on $\Omega$. From the definition of $E[f]$, we have $$E[tf] = \sum\limits_{\omega \in \Omega} P(\omega)[tf(\omega)]$$ $$= \sum\limits_{\omega \in \Omega} tP(\omega)f(\omega)$$ $$= t\sum\limits_{\omega \in \Omega} P(\omega)f(\omega)$$ $$= tE[f]$$
+  
+  And with that, we have proved that $E[\cdot]$ is a linear operator. \qed
+  
+  \item For the second item, we will use the fact that $E[\cdot]$ is a linear operator in our favour. We know that $Var[f(\omega)] = E[(f(\omega) - E[f(\omega)])^2]$. Expanding the square power, we have $$Var[f(\omega)] = E[f(\omega)^2 + E[f(\omega)]^2 - 2f(\omega)E[f(\omega)]]$$
+  
+  Using the linearity of the $E[\cdot]$ operand, we can separate the expectation operand in three other operands. Note that $E[E[f(x)]] = E[f(x)]$ since the expectation of a real value is the value itself. With that in mind, we have $$Var[f(\omega)] = E[f(\omega)^2] + E[f(\omega)^2] - 2*E[f(\omega)]E[f(\omega)]$$ $$= E[f(\omega)^2] + E[f(\omega)]^2 - 2*E[f(\omega)]^2$$ $$= E[f(\omega)^2] - E[f(\omega)^2]$$ \qed
+  \end{itemize}
+\end{SL}
+
+% --------------------------------------------------------------
+% Next exercise
+% --------------------------------------------------------------
+
+\begin{EX}{R.2}
+Let \textbf{A} $\in \mathbb{R}^{N \times N}$ be a symmetric matrix with distinct eigenvalues $\lambda_i \in \mathbb{R}\ (i = 1, 2, \ldots, N)$, defined by \textbf{Av$_i$} = $\lambda_i$\textbf{v$_i$} and eigenvectors that satisfy \textbf{v$_i^T$v$_j$}$= \delta_{ij}$ where the Kronecker delta is $\delta_{ij} = 1$ if $i = j$ and $\delta_{ij} = 0$ otherwise. Let the spectral decomposition $$\text{\textbf{B}} = \sum\limits_{i=1}^N\sum\limits_{j=1}^N \lambda_i\text{\textbf{v}}_i^T\text{\textbf{v}}_j$$ Show that \textbf{B} has the same eigenvectors and eigenvalues as \textbf{A} (Showing that \textbf{A} $=$ \textbf{B} is not needed).
+\end{EX}
+
+\begin{SL}\
+ We begin this proof by analysing the law of formation of \textbf{B}. It is multiplying an eigenvector $v_i$ by its correspondent eigenvalue $\lambda_i$ and another eigenvector $v_j$. With a little of imagination, we can be rewrite \textbf{B} in matrix form as $$\text{\textbf{B}} = \text{\textbf{Q}} \Lambda \text{\textbf{Q}}^T,$$ where \textbf{Q} is a $N \times N$ matrix such that the $i_{\text{th}}$ column is $v_i$ and $\Lambda$ is a diagonal $N \times N$ matrix where where the element in position $ii$ is equal to $\lambda_i$.
+ 
+ Now let's take a closer look at \textbf{Q}. From the information given, the product between two distinct eigenvectors of \textbf{A} is equal to $0$, and the product between two equal eigenvectors is $1$. That is enough to show that \textbf{Q} is an orthogonal matrix. Then, from the properties of orthogonal matrices, we also know that $Q^T = Q^{-1}$.
+ 
+ Let $v_i$ be an eigenvector of \textbf{A}. We will show that it is also an eigenvector of \textbf{B} and that its correspondent eigenvalue will be $\lambda_i$. Let's then multiply \textbf{B} by $v_i$: $$\text{\textbf{B}}v_i = \text{\textbf{Q}} \Lambda \text{\textbf{Q}}^Tv_i = \text{\textbf{Q}} \Lambda (\text{\textbf{Q}}^Tv_i) = \text{\textbf{Q}} \Lambda v_{prod}$$ where $v_{prod}$ is a $n$-dimensional vector with 1 in the $i_{th}$ position and 0 elsewhere. Multiplying $\Lambda$ by $v_{prod}$, we will get a vector $v_{\lambda_i}$, with only $\lambda_i$ in the $i_{th}$ spot and 0 elsewhere. Then, we stay with $$\text{\textbf{B}}v_i = \text{\textbf{Q}}v_{\lambda_i} = v_i\lambda_i.$$
+ 
+ That concludes our proof, since we know that every eigenvector of \textbf{A} is also an eigenvector of \textbf{B} and the correspondent eigenvalues are the same. \qed
+\end{SL}
+
+% --------------------------------------------------------------
+% Next exercise
+% --------------------------------------------------------------
+
+\begin{EX}{R.3}
+ Fibonacci numbers $F(i)$ are defined for $i \in \mathbb{N}$ recursively as $F(i+2) = F(i+1) + F(i)$, with $F(1) = F(2) = 1$. Using pseudo-code, write down an algorithm that takes $n \in \mathbb{N}$ as input and outputs the Fibonacci numbers from $F(1)$ to $F(n)$. Analyse the time complexity of your algorithm using $\mathbb{O}$ notation. Briefly discuss the efficiency of your algorithm.
+\end{EX}
+
+\begin{SL}
+ Let's begin by presenting an algorithm for the Fibonacci numbers problem.
+ 
+ \begin{center}
+  \begin{program}
+   $f := list(n)$; \\
+   $f[1] := 1$; \\
+   \(\IF $n := 1$ \THEN return\ 1 \END;\) \\ 
+   $f[2] := 1$; \\
+   \(\IF $n := 2$ \THEN return\ f;  \END;\) \\
+   \(\FOR $i := 3$ \TO $n$ \DO \\ f[i] := f[i-1] + f[i]; \\ \)\\
+   \END;
+   return\ f
+  \end{program}
+ \end{center}
+\end{SL}
+
+This algorithm works by creating a list that will store the Fibonacci numbers. It first checks to see if $n$ is equal to $1$ or $2$, which are the base cases and do not require any calculation. For the other numbers (from $3$ to $n$), we run through the positions of the list and calculate the values using the calculations from past iterations. At the end of the process, our list is populated with the Fibonacci numbers from $1$ to $n$.
+
+Let's have a look at the time complexity of our algorithm. The first five instructions are all $\mathbb{O}(1)$, because they are only stand-alone attributions and comparisons. The for loop runs for $n-2$ steps (from $3$ to $n$), which is $\mathbb{O}(n)$. Then, combining it all, the algorithm is $\mathbb{O}(n)$. That is actually a pretty good approach, given that there are recursive algorithms that are exponential or factorial. Implementing it in python and checking the execution time for $n=1$  and $n=10000$
+% --------------------------------------------------------------
+% Stop here
+% --------------------------------------------------------------
+
+\end{document}
